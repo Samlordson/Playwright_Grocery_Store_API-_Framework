@@ -1,4 +1,5 @@
 import { APIRequestContext, APIResponse } from '@playwright/test';
+import { Logger } from "../utils/Logger";
 
 export class BaseApi {
 
@@ -9,8 +10,19 @@ export class BaseApi {
     }
 
     async get(endpoint: string): Promise<APIResponse> {
-        return await this.request.get(endpoint);
-    }
+
+    Logger.info(`GET ${endpoint}`);
+
+    const response = await this.request.get(endpoint);
+
+    Logger.success(
+        `Status : ${response.status()}`
+    );
+
+    return response;
+
+}
+    
 
     async post(endpoint: string, data: any): Promise<APIResponse> {
         return await this.request.post(endpoint, { data });
