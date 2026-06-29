@@ -1,5 +1,6 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
 import { BaseApi } from "./BaseApi";
+import { TokenManager } from "../utils/TokenManager";
 
 export class ClientApi extends BaseApi {
 
@@ -8,18 +9,23 @@ export class ClientApi extends BaseApi {
     }
 
     async registerClient(
-        clientName: string,
-        clientEmail: string
-    ): Promise<APIResponse> {
+    clientName: string,
+    clientEmail: string
+): Promise<APIResponse> {
 
-        return this.post(
-            "/api-clients",
-            {
-                clientName,
-                clientEmail
-            }
-        );
+    const response = await this.post(
+        "/api-clients",
+        {
+            clientName,
+            clientEmail
+        }
+    );
 
-    }
+    const body = await response.json();
 
+    TokenManager.setToken(body.accessToken);
+
+    return response;
+
+}
 }

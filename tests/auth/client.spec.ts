@@ -1,4 +1,5 @@
 import { test, expect } from "../../fixtures/apiFixture";
+import { TokenManager } from "../../utils/TokenManager";
 
 test("Register API Client", async ({ clientAPI }) => {
 
@@ -15,10 +16,14 @@ test("Register API Client", async ({ clientAPI }) => {
 
     const body =
         await response.json();
-
-    console.log(body);
-
-    expect(body.accessToken)
+        
+        expect(body.accessToken)
         .toBeDefined();
+
+    console.log(
+    TokenManager.getToken()
+);
+
+    
 
 });
