@@ -21,5 +21,11 @@ export class CartApi extends BaseApi {
     return response;
 
     }
+async getCart(): Promise<APIResponse> {
 
+    const cartId = CartManager.getCartId();
+
+    return this.get(`/carts/${cartId}`);
+
+}
 }
