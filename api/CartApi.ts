@@ -1,5 +1,6 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
 import { BaseApi } from "./BaseApi";
+import { CartManager } from "../utils/CartManager";
 
 export class CartApi extends BaseApi {
 
@@ -9,7 +10,15 @@ export class CartApi extends BaseApi {
 
     async createCart(): Promise<APIResponse> {
 
-        return this.post("/carts", {});
+       const response =
+        await this.post("/carts", {});
+
+    const body =
+        await response.json();
+
+    CartManager.setCartId(body.cartId);
+
+    return response;
 
     }
 
