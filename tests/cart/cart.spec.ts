@@ -109,4 +109,32 @@ test("Update Quantity", async ({ cartAPI }) => {
 
 });
 
+test("Replace Item", async ({ cartAPI }) => {
+
+    // Create Cart
+    await cartAPI.createCart();
+
+    // Add Product
+    await cartAPI.addItem(1225, 1);
+
+
+    //Replace Item
+    const replaceitemResponse = await cartAPI.replaceItem(4643,2);
+
+    // Verify Update
+    const response = await cartAPI.getCartItems();
+
+    expect(response.status()).toBe(200);
+
+    const body = await response.json();
+
+    console.log(body);
+
+    expect(body[0].productId).toBe(4643);
+    expect(body[0].quantity).toBe(2);
+
+expect(body[0].id).toBe(ItemManager.getItemId());
+
+});
+
 });

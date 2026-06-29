@@ -70,5 +70,21 @@ async updateQuantity(quantity: number): Promise<APIResponse> {
         }
     );
 }
+async replaceItem(
+    productId: number,
+    quantity: number
+): Promise<APIResponse> {
+
+    const cartId = CartManager.getCartId();
+    const itemId = ItemManager.getItemId();
+
+    return await this.put(
+        `/carts/${cartId}/items/${itemId}`,
+        {
+            productId,
+            quantity
+        }
+    );
+}
 
 }
