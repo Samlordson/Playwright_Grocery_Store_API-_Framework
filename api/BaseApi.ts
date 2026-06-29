@@ -36,7 +36,10 @@ export class BaseApi {
         return await this.request.patch(endpoint, { data });
     }
 
-    async delete(endpoint: string): Promise<APIResponse> {
-        return await this.request.delete(endpoint);
-    }
+    
+    async delete(endpoint: string, data?: any): Promise<APIResponse> {
+    return await this.request.delete(endpoint, {
+        data
+    });
+}
 }

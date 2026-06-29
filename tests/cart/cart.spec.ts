@@ -136,5 +136,25 @@ test("Replace Item", async ({ cartAPI }) => {
 expect(body[0].id).toBe(ItemManager.getItemId());
 
 });
+test("Delete Item", async ({ cartAPI }) => {
 
+    await cartAPI.createCart();
+
+    await cartAPI.addItem(1225, 1);
+
+    const deleteResponse =
+        await cartAPI.deleteItem();
+
+    expect(deleteResponse.status()).toBe(204);
+
+    const response =
+        await cartAPI.getCartItems();
+
+    expect(response.status()).toBe(200);
+
+    const body =
+        await response.json();
+
+    expect(body).toHaveLength(0);
+});
 });

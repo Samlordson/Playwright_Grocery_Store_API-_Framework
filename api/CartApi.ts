@@ -86,5 +86,13 @@ async replaceItem(
         }
     );
 }
+async deleteItem(): Promise<APIResponse> {
 
+    const cartId = CartManager.getCartId();
+    const itemId = ItemManager.getItemId();
+
+    return await this.delete(
+        `/carts/${cartId}/items/${itemId}`
+    );
+}
 }
