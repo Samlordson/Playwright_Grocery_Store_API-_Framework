@@ -2,11 +2,13 @@ import { test as base, expect } from '@playwright/test';
 import { StatusApi } from '../api/StatusApi';
 import { ClientApi } from '../api/ClientApi';
 import { ProductApi } from '../api/ProductApi';
+import { CartApi } from '../api/CartApi';
 
 type APIFixtures = {
     statusAPI: StatusApi;
     clientAPI: ClientApi;
     productAPI: ProductApi;
+    cartAPI:CartApi;
 };
 
 export const test = base.extend<APIFixtures>({
@@ -18,7 +20,7 @@ export const test = base.extend<APIFixtures>({
         await use(statusAPI);
 
     },
-    
+
     clientAPI: async ({ request }, use) => {
 
     const clientAPI = new ClientApi(request);
@@ -33,6 +35,14 @@ productAPI: async ({ request }, use) => {
         new ProductApi(request);
 
     await use(productAPI);
+
+},
+
+cartAPI: async ({ request }, use) => {
+
+    const cartAPI = new CartApi(request);
+
+    await use(cartAPI);
 
 },
     
