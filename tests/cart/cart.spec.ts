@@ -1,6 +1,9 @@
 import { test, expect } from "../../fixtures/apiFixture";
 import { CartManager } from "../../utils/CartManager";
 import { ItemManager } from "../../utils/ItemManager";
+import { cartSchema } from "../../schemas/cartSchema";
+import { SchemaValidator } from "../../utils/SchemaValidator";
+
 
 test.describe("Cart API", () => {
 
@@ -15,13 +18,15 @@ test.describe("Cart API", () => {
         const body =
             await response.json();
 
+            SchemaValidator.validate(cartSchema, body);
+
+
+
         console.log(body);
 
-        expect(body.created)
-            .toBe(true);
+        expect(body.created).toBe(true);
 
-        expect(body.cartId)
-            .toBeDefined();
+        expect(body.cartId) .toBeDefined();
 
     });
 
@@ -36,6 +41,7 @@ test.describe("Cart API", () => {
     const body = await response.json();
 
     console.log(body);
+    
 
     expect(Array.isArray(body.items)).toBeTruthy();
 
@@ -55,6 +61,7 @@ test("Add Item To Cart", async ({ cartAPI }) => {
 
     const body =
         await response.json();
+        
 
     console.log(body);
 
@@ -70,6 +77,7 @@ test("Get Cart Items", async ({ cartAPI }) => {
     expect(response.status()).toBe(200);
 
     const body = await response.json();
+     
 
     console.log(body);
 
@@ -102,7 +110,7 @@ test("Update Quantity", async ({ cartAPI }) => {
     expect(response.status()).toBe(200);
 
     const body = await response.json();
-
+ 
     console.log(body);
 
     expect(body[0].quantity).toBe(5);
@@ -123,7 +131,7 @@ test("Replace Item", async ({ cartAPI }) => {
 
     // Verify Update
     const response = await cartAPI.getCartItems();
-
+ 
     expect(response.status()).toBe(200);
 
     const body = await response.json();
@@ -154,7 +162,7 @@ test("Delete Item", async ({ cartAPI }) => {
 
     const body =
         await response.json();
-
+ 
     expect(body).toHaveLength(0);
 });
 });

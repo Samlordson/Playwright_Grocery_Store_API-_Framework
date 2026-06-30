@@ -1,4 +1,8 @@
 import { test, expect } from "../../fixtures/apiFixture";
+import { SchemaValidator } from "../../utils/SchemaValidator";
+import { orderSchema } from "../../schemas/orderSchema";
+import { ordersSchema } from "../../schemas/ordersSchema";
+import { createOrderSchema } from "../../schemas/createorderSchema.ts";
 
 test.describe("Order API", () => {
 
@@ -28,11 +32,12 @@ test.describe("Order API", () => {
 
         // Create Order
         const orderResponse = await orderAPI.createOrder();
+        
 
         expect(orderResponse.status()).toBe(201);
 
         const body = await orderResponse.json();
-
+    SchemaValidator.validate(createOrderSchema, body);
         expect(body.created).toBe(true);
         expect(body.orderId).toBeDefined();
     });
@@ -60,6 +65,8 @@ test.describe("Order API", () => {
 
     const body = await response.json();
 
+    SchemaValidator.validate(ordersSchema, body);
+
     expect(Array.isArray(body)).toBeTruthy();
 });
 test("Get Single Order", async ({
@@ -84,9 +91,11 @@ test("Get Single Order", async ({
     expect(response.status()).toBe(200);
 
     const body = await response.json();
+   SchemaValidator.validate(orderSchema, body);
 
     expect(body.id).toBeDefined();
 });
+
 test("Update Order", async ({
     clientAPI,
     cartAPI,
@@ -103,11 +112,11 @@ test("Update Order", async ({
     await cartAPI.addItem(1225, 2);
 
    await orderAPI.createOrder();
-
+   
     const response = await orderAPI.updateOrder(
         "Please deliver after 6 PM"
     );
-
+    
     expect(response.status()).toBe(204);
 });
 test("Delete Order", async ({
@@ -130,5 +139,6 @@ test("Delete Order", async ({
     const response = await orderAPI.deleteOrder();
 
     expect(response.status()).toBe(204);
+    
 });
 });

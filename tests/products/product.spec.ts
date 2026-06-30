@@ -1,6 +1,8 @@
 import { test, expect } from "../../fixtures/apiFixture";
-import { SchemaValidator } from "../../utils/SchemaValidator";
+import { SchemaValidator } from "../../utils/SchemaValidator"
 import { productSchema } from "../../schemas/productSchema";
+import { productsSchema } from "../../schemas/productsSchema.ts";
+
 
 test.describe("Products API", () => {
 
@@ -12,8 +14,10 @@ test.describe("Products API", () => {
 
         const body = await response.json();
 
-        expect(body.length).toBeGreaterThan(0);
+        SchemaValidator.validate( productsSchema,body);
 
+        expect(body.length).toBeGreaterThan(0);
+        
     });
 
     test("Get Product By ID", async ({ productAPI }) => {

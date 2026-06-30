@@ -1,10 +1,11 @@
 export const productSchema = {
+
     type: "object",
 
     properties: {
 
         id: {
-            type: "integer"
+            type: "number"
         },
 
         category: {
@@ -26,7 +27,6 @@ export const productSchema = {
         "category",
         "name",
         "inStock"
-    ],
+    ]
 
-    additionalProperties: true
 };
