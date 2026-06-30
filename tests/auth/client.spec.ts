@@ -1,10 +1,11 @@
 import { test, expect } from "../../fixtures/apiFixture";
 import { TokenManager } from "../../utils/TokenManager";
 import { ClientBuilder } from "../../Builders/ClientBuilder";
+import { TestDataFactory } from "../../testdata/TestDataFactory";
 
 test("Register API Client", async ({ clientAPI }) => {
 
-    const client = new ClientBuilder().build();
+   const client = TestDataFactory.client();
 
 const response = await clientAPI.registerClient(
     client.clientName,
@@ -17,9 +18,8 @@ const body = await response.json();
 
 expect(body.accessToken).toBeDefined();
 
-    console.log(
-    TokenManager.getToken()
-);
+console.log(TokenManager.getToken());
+
 
     
 

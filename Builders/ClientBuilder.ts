@@ -4,7 +4,7 @@ export class ClientBuilder {
 
     private clientName = faker.person.fullName();
     private clientEmail = faker.internet.email();
-
+     
     withName(name: string) {
         this.clientName = name;
         return this;

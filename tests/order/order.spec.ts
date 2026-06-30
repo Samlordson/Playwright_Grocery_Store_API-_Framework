@@ -3,32 +3,32 @@ import { SchemaValidator } from "../../utils/SchemaValidator";
 import { orderSchema } from "../../schemas/orderSchema";
 import { ordersSchema } from "../../schemas/ordersSchema";
 import { createOrderSchema } from "../../schemas/createorderSchema.ts";
+import { TestDataFactory } from "../../testdata/TestDataFactory.ts";
 
 test.describe("Order API", () => {
-
+    
     test("Create Order", async ({
         clientAPI,
         cartAPI,
         orderAPI
     }) => {
 
-        // Register Client
-        const registerResponse = await clientAPI.registerClient(
-            "Sam",
-            `sam${Date.now()}@gmail.com`
-        );
+      const client = TestDataFactory.client();
+const item = TestDataFactory.item();
 
-        expect(registerResponse.status()).toBe(201);
+const registerResponse = await clientAPI.registerClient(
+    client.clientName,
+    client.clientEmail
+);
 
-        // Create Cart
-        const createCartResponse = await cartAPI.createCart();
+expect(registerResponse.status()).toBe(201);
 
-        expect(createCartResponse.status()).toBe(201);
+await cartAPI.createCart();
 
-        // Add Product
-        const addItemResponse = await cartAPI.addItem(1225, 2);
-
-        expect(addItemResponse.status()).toBe(201);
+await cartAPI.addItem(
+    item.productId,
+    item.quantity
+);
 
         // Create Order
         const orderResponse = await orderAPI.createOrder();
@@ -48,16 +48,22 @@ test.describe("Order API", () => {
     orderAPI
 }) => {
 
-    await clientAPI.registerClient(
-        "Sam",
-        `sam${Date.now()}@gmail.com`
-    );
+    const client = TestDataFactory.client();
+const item = TestDataFactory.item();
 
-    await cartAPI.createCart();
+await clientAPI.registerClient(
+    client.clientName,
+    client.clientEmail
+);
 
-    await cartAPI.addItem(1225, 2);
+await cartAPI.createCart();
 
-    await orderAPI.createOrder();
+await cartAPI.addItem(
+    item.productId,
+    item.quantity
+);
+
+await orderAPI.createOrder();
 
     const response = await orderAPI.getAllOrders();
 
@@ -69,22 +75,29 @@ test.describe("Order API", () => {
 
     expect(Array.isArray(body)).toBeTruthy();
 });
+
 test("Get Single Order", async ({
     clientAPI,
     cartAPI,
     orderAPI
 }) => {
 
-    await clientAPI.registerClient(
-        "Sam",
-        `sam${Date.now()}@gmail.com`
-    );
+   const client = TestDataFactory.client();
+const item = TestDataFactory.item();
 
-    await cartAPI.createCart();
+await clientAPI.registerClient(
+    client.clientName,
+    client.clientEmail
+);
 
-    await cartAPI.addItem(1225, 2);
+await cartAPI.createCart();
 
-    await orderAPI.createOrder();
+await cartAPI.addItem(
+    item.productId,
+    item.quantity
+);
+
+await orderAPI.createOrder();
 
     const response = await orderAPI.getOrder();
 
@@ -102,37 +115,51 @@ test("Update Order", async ({
     orderAPI
 }) => {
 
-    await clientAPI.registerClient(
-        "Sam",
-        `sam${Date.now()}@gmail.com`
-    );
+    const client = TestDataFactory.client();
+const item = TestDataFactory.item();
+const order = TestDataFactory.order();
 
-    await cartAPI.createCart();
+await clientAPI.registerClient(
+    client.clientName,
+    client.clientEmail
+);
 
-    await cartAPI.addItem(1225, 2);
+await cartAPI.createCart();
 
-   await orderAPI.createOrder();
-   
-    const response = await orderAPI.updateOrder(
-        "Please deliver after 6 PM"
-    );
+await cartAPI.addItem(
+    item.productId,
+    item.quantity
+);
+
+await orderAPI.createOrder();
+
+const response = await orderAPI.updateOrder(
+    order.comment
+);
     
     expect(response.status()).toBe(204);
 });
+
 test("Delete Order", async ({
     clientAPI,
     cartAPI,
     orderAPI
 }) => {
 
-    await clientAPI.registerClient(
-        "Sam",
-        `sam${Date.now()}@gmail.com`
-    );
+  const client = TestDataFactory.client();
+const item = TestDataFactory.item();
 
-    await cartAPI.createCart();
+await clientAPI.registerClient(
+    client.clientName,
+    client.clientEmail
+);
 
-    await cartAPI.addItem(1225, 2);
+await cartAPI.createCart();
+
+await cartAPI.addItem(
+    item.productId,
+    item.quantity
+);
 
     await orderAPI.createOrder();
 

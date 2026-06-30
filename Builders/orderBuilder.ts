@@ -2,16 +2,16 @@ import { faker } from "@faker-js/faker";
 
 export class OrderBuilder {
 
-    private customerName = faker.person.firstName();
+    private comment = faker.lorem.sentence();
 
-    withCustomer(name: string) {
-        this.customerName = name;
+    withComment(comment: string) {
+        this.comment = comment;
         return this;
     }
 
     build() {
         return {
-            customerName: this.customerName
+            comment: this.comment
         };
     }
 }

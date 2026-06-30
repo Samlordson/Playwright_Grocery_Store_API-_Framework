@@ -3,6 +3,8 @@ import { CartManager } from "../../utils/CartManager";
 import { ItemManager } from "../../utils/ItemManager";
 import { cartSchema } from "../../schemas/cartSchema";
 import { SchemaValidator } from "../../utils/SchemaValidator";
+import { TestDataFactory } from "../../testdata/TestDataFactory";
+import { ItemBuilder } from "../../Builders/ItemBuilder";
 
 
 test.describe("Cart API", () => {
@@ -54,8 +56,12 @@ test("Add Item To Cart", async ({ cartAPI }) => {
 
     await cartAPI.createCart();
 
-    const response =
-        await cartAPI.addItem(1225, 1);
+    const item = TestDataFactory.item();
+
+const response = await cartAPI.addItem(
+    item.productId,
+    item.quantity
+);
 
     expect(response.status()).toBe(201);
 
@@ -66,6 +72,7 @@ test("Add Item To Cart", async ({ cartAPI }) => {
     console.log(body);
 
 });
+
 test("Get Cart Items", async ({ cartAPI }) => {
 
     await cartAPI.createCart();
@@ -96,11 +103,20 @@ test("Update Quantity", async ({ cartAPI }) => {
     // Create Cart
     await cartAPI.createCart();
 
+    // Test Data
+    const item = TestDataFactory.item();
+
     // Add Product
-    await cartAPI.addItem(1225, 1);
+    await cartAPI.addItem(
+        item.productId,
+        item.quantity
+    );
+
+    // New quantity to update
+    const updatedQuantity = item.quantity + 4;
 
     // Update Quantity
-    const updateResponse = await cartAPI.updateQuantity(5);
+    const updateResponse = await cartAPI.updateQuantity(updatedQuantity);
 
     expect(updateResponse.status()).toBe(204);
 
@@ -110,10 +126,10 @@ test("Update Quantity", async ({ cartAPI }) => {
     expect(response.status()).toBe(200);
 
     const body = await response.json();
- 
+
     console.log(body);
 
-    expect(body[0].quantity).toBe(5);
+    expect(body[0].quantity).toBe(updatedQuantity);
 
 });
 
@@ -122,26 +138,41 @@ test("Replace Item", async ({ cartAPI }) => {
     // Create Cart
     await cartAPI.createCart();
 
-    // Add Product
-    await cartAPI.addItem(1225, 1);
+    // Original Item
+    const item = TestDataFactory.item();
 
+    await cartAPI.addItem(
+        item.productId,
+        item.quantity
+    );
 
-    //Replace Item
-    const replaceitemResponse = await cartAPI.replaceItem(4643,2);
+    // Replacement Item
+    const replacementItem = TestDataFactory.item(builder =>
+        builder
+            .withProduct(4643)
+            .withQuantity(2)
+    );
 
-    // Verify Update
+    // Replace Item
+    const replaceResponse = await cartAPI.replaceItem(
+        replacementItem.productId,
+        replacementItem.quantity
+    );
+
+    expect(replaceResponse.status()).toBe(204);
+
+    // Verify
     const response = await cartAPI.getCartItems();
- 
+
     expect(response.status()).toBe(200);
 
     const body = await response.json();
 
     console.log(body);
 
-    expect(body[0].productId).toBe(4643);
-    expect(body[0].quantity).toBe(2);
-
-expect(body[0].id).toBe(ItemManager.getItemId());
+    expect(body[0].productId).toBe(replacementItem.productId);
+    expect(body[0].quantity).toBe(replacementItem.quantity);
+    expect(body[0].id).toBe(ItemManager.getItemId());
 
 });
 test("Delete Item", async ({ cartAPI }) => {
