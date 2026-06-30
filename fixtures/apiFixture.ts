@@ -3,12 +3,14 @@ import { StatusApi } from '../api/StatusApi';
 import { ClientApi } from '../api/ClientApi';
 import { ProductApi } from '../api/ProductApi';
 import { CartApi } from '../api/CartApi';
+import { OrderApi } from '../api/OrderApi';
 
 type APIFixtures = {
     statusAPI: StatusApi;
     clientAPI: ClientApi;
     productAPI: ProductApi;
     cartAPI:CartApi;
+    orderAPI: OrderApi;
 };
 
 export const test = base.extend<APIFixtures>({
@@ -44,6 +46,10 @@ cartAPI: async ({ request }, use) => {
 
     await use(cartAPI);
 
+},
+orderAPI: async ({ request }, use) => {
+    const orderAPI = new OrderApi(request);
+    await use(orderAPI);
 },
     
 
