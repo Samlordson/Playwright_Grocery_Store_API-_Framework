@@ -1,6 +1,7 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
 import { BaseApi } from "./BaseApi";
 import { TokenManager } from "../utils/TokenManager";
+import { ClientManager } from "../utils/ClientManager";
 
 export class ClientApi extends BaseApi {
 
@@ -24,6 +25,7 @@ export class ClientApi extends BaseApi {
     const body = await response.json();
 
     TokenManager.setToken(body.accessToken);
+    ClientManager.setCustomerName(clientName);
 
     return response;
 

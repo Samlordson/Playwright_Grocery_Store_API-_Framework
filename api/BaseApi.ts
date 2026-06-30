@@ -68,7 +68,7 @@ export class BaseApi {
 
     }
 
-    async delete(
+ async delete(
     endpoint: string,
     data?: any,
     headers?: Record<string, string>
@@ -78,5 +78,6 @@ export class BaseApi {
         headers
     });
 }
-
 }
+
+
