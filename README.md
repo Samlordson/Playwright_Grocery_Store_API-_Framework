@@ -1,29 +1,33 @@
 # 🛒 Playwright Grocery Store API Automation Framework
 
-A production-ready API Automation Framework built using Playwright + TypeScript following industry best practices.
+A production-ready API Automation Framework built using **Playwright + TypeScript**, following industry best practices with CI/CD integration.
 
 ---
 
-## Tech Stack
+# Tech Stack
 
 - Playwright API Testing
 - TypeScript
+- Playwright Test Runner
 - JSON Schema Validation (Ajv)
-- Faker
+- Faker.js
 - Builder Pattern
-- TestDataFactory
+- Test Data Factory
 - Playwright Fixtures
-- Page Object / API Manager Pattern
-- GitHub Actions (Coming Soon)
-- Docker (Coming Soon)
-- Allure Reports (Coming Soon)
+- API Manager Pattern
+- GitHub Actions
+- Jenkins Pipeline
+- Allure Reports
+- HTML Reports
+- Git
+- GitHub
+- Node.js
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```
-
 .
 ├── api/
 ├── Builders/
@@ -31,84 +35,73 @@ A production-ready API Automation Framework built using Playwright + TypeScript 
 ├── schemas/
 ├── testdata/
 ├── tests/
+│   ├── auth/
+│   ├── cart/
+│   ├── order/
+│   ├── products/
+│   └── status/
 ├── utils/
+├── allure-results/
+├── allure-report/
+├── playwright-report/
+├── Jenkinsfile
 ├── package.json
 └── playwright.config.ts
-
 ```
 
 ---
 
-## Features
+# Features
 
-- Client API Testing
-- Cart API Testing
-- Product API Testing
-- Order API Testing
-- Status API Testing
+## API Modules Covered
 
-### Framework Features
+- Authentication API
+- Cart API
+- Product API
+- Order API
+- Status API
+
+---
+
+## Framework Features
 
 - Builder Pattern
-- TestDataFactory
+- Test Data Factory
 - JSON Schema Validation
 - Reusable API Managers
-- Fixtures
+- Playwright Fixtures
 - Token Management
-- Logging
+- Dynamic Test Data
 - Clean Architecture
+- Centralized Configuration
+- Environment Support
+- Logging
+- Assertions
+- Parallel Execution
 
 ---
 
-## Installation
+# CI/CD
 
-```bash
-npm install
-```
+✅ GitHub Actions
 
----
+- Automatic execution on Push
+- HTML Report Generation
+- Allure Report Generation
 
-## Execute All Tests
+✅ Jenkins Pipeline
 
-```bash
-npx playwright test
-```
-
----
-
-## Execute Client Tests
-
-```bash
-npx playwright test tests/auth
-```
+- Source Checkout
+- Dependency Installation
+- Playwright Test Execution
+- Allure Report Generation
+- Artifact Archiving
 
 ---
 
-## Execute Cart Tests
+# Reports
 
-```bash
-npx playwright test tests/cart
-```
-
----
-
-## Execute Order Tests
-
-```bash
-npx playwright test tests/order
-```
-
----
-
-## Execute Product Tests
-
-```bash
-npx playwright test tests/products
-```
-
----
-
-## HTML Report
+## Playwright HTML Report
 
 ```bash
 npx playwright show-report
@@ -116,46 +109,192 @@ npx playwright show-report
 
 ---
 
-## Framework Design
+## Allure Report
 
-Builder Pattern
+Generate Report
 
+```bash
+npm run allure:generate
 ```
 
+Open Report
+
+```bash
+npm run allure:open
+```
+
+---
+
+# Installation
+
+Clone Repository
+
+```bash
+git clone https://github.com/Samlordson/Playwright_Grocery_Store_API-_Framework.git
+```
+
+Install Dependencies
+
+```bash
+npm install
+```
+
+Install Playwright Browsers
+
+```bash
+npx playwright install
+```
+
+---
+
+# Execute Tests
+
+Run Complete Suite
+
+```bash
+npx playwright test
+```
+
+Run Authentication Tests
+
+```bash
+npx playwright test tests/auth
+```
+
+Run Cart Tests
+
+```bash
+npx playwright test tests/cart
+```
+
+Run Product Tests
+
+```bash
+npx playwright test tests/products
+```
+
+Run Order Tests
+
+```bash
+npx playwright test tests/order
+```
+
+Run Status Tests
+
+```bash
+npx playwright test tests/status
+```
+
+---
+
+# Framework Design
+
+## Builder Pattern
+
+```
 ClientBuilder
-
 ItemBuilder
-
 OrderBuilder
-
 ```
 
-Test Data Factory
+---
+
+## Test Data Factory
 
 ```
-
 TestDataFactory
 ├── client()
 ├── item()
 └── order()
-
 ```
 
 ---
 
-## Future Enhancements
+# Reporting
 
-- Docker Support
-- Jenkins Pipeline
-- GitHub Actions
-- Allure Reporting
-- Slack Notifications
-- Azure DevOps Pipeline
+- Playwright HTML Report
+- Allure Report
+- Jenkins Build Artifacts
+- GitHub Actions Workflow Reports
 
 ---
 
-## Author
+# CI/CD Workflow
 
-**Samlordson R B**
+```
+Developer
+      │
+      ▼
+GitHub Repository
+      │
+      ▼
+GitHub Actions
+      │
+      ▼
+Run Playwright Tests
+      │
+      ▼
+Generate Reports
+      │
+      ▼
+Publish Artifacts
+
+----------------------------
+
+GitHub Push
+      │
+      ▼
+GitHub Webhook
+      │
+      ▼
+Jenkins Pipeline
+      │
+      ▼
+Checkout Source
+      │
+      ▼
+Install Dependencies
+      │
+      ▼
+Execute Playwright Tests
+      │
+      ▼
+Generate Allure Report
+      │
+      ▼
+Archive Reports
+```
+
+---
+
+# Future Enhancements
+
+- Dockerized Execution
+- Azure DevOps Pipeline
+- Slack Notifications
+- Email Notifications
+- Multiple Environment Support
+- API Performance Testing
+- Newman Integration
+- SonarQube Integration
+
+---
+
+# Author
+
+## Samlordson R B
 
 QA Automation Engineer
+
+### Skills
+
+- Playwright
+- TypeScript
+- API Automation
+- Selenium
+- Jenkins
+- GitHub Actions
+- Docker
+- CI/CD
+- REST API Testing
+- JSON Schema Validation
