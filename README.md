@@ -1,5 +1,4 @@
-# 🛒 Playwright Grocery Store API Automation Framework
-
+# 🛒 # 🚀 Playwright Grocery Store API Automation Framework with CI/CD
 A production-ready API Automation Framework built using **Playwright + TypeScript**, following industry best practices with CI/CD integration.
 
 ---
