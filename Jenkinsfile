@@ -28,10 +28,16 @@ pipeline {
         }
 
         stage('Generate Allure Report') {
-            steps {
-                bat 'npm run allure:generate'
-            }
-        }
+    steps {
+        bat 'npm run allure:generate'
+
+        allure(
+            includeProperties: false,
+            jdk: '',
+            results: [[path: 'allure-results']]
+        )
+    }
+}
     }
 
     post {
