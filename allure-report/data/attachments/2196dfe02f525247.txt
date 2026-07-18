@@ -1,0 +1,26 @@
+
+==================================================
+REQUEST : POST
+==================================================
+Endpoint : /api-clients
+
+Request Body:
+{
+  "clientName": "Dr. Roosevelt Jerde",
+  "clientEmail": "Ashleigh_Wolf7@hotmail.com"
+}
+==================================================
+
+
+==================================================
+RESPONSE
+==================================================
+Status : 201
+
+Response Body:
+{
+  "accessToken": "e355539a8f0d85edba5a5653713f4b1cd2e41cc0ce9cadc6d49bbe7e5fb617b1"
+}
+==================================================
+
+e355539a8f0d85edba5a5653713f4b1cd2e41cc0ce9cadc6d49bbe7e5fb617b1

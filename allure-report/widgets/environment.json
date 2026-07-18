@@ -1,1 +1,1 @@
-[]
+[{"values":["QA"],"name":"Environment"},{"values":["Simple Grocery Store API"],"name":"Application"},{"values":["Playwright Hybrid"],"name":"Framework"},{"values":["TypeScript"],"name":"Language"},{"values":["22.x"],"name":"NodeJS"},{"values":["Chromium"],"name":"Browser"},{"values":["Local"],"name":"Execution"}]

@@ -1,0 +1,26 @@
+
+==================================================
+REQUEST : POST
+==================================================
+Endpoint : /api-clients
+
+Request Body:
+{
+  "clientName": "Mrs. Dolores Bednar",
+  "clientEmail": "Gilberto93@gmail.com"
+}
+==================================================
+
+
+==================================================
+RESPONSE
+==================================================
+Status : 201
+
+Response Body:
+{
+  "accessToken": "8f8adaac36d6def1ae561cef1153791badf3bd902a5e0b63be310a5afe7c5cc5"
+}
+==================================================
+
+8f8adaac36d6def1ae561cef1153791badf3bd902a5e0b63be310a5afe7c5cc5
